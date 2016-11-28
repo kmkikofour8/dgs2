@@ -1,0 +1,14 @@
+{
+    "require":{
+         "paypal/sdk-core-php":"2.5.*",
+        "paypal/rest-api-sdk-php":"*",
+         "paypal/adaptivepayments-sdk-php":"*",
+         "paypal/merchant-sdk-php":"*",
+         "paypal/adaptiveaccounts-sdk-php":"*",
+         "angelleye/paypal-php-library": "2.0.*",
+        "silex/silex": "1.0.*@dev",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "google/apiclient": "1.0.*@beta",
+        "guzzlehttp/guzzle": "5.2.*"
+    }
+}

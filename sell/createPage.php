@@ -1,0 +1,76 @@
+<?php
+    include "$_SERVER[DOCUMENT_ROOT]/Header.php";
+$sellerID = $_SESSION['login_user'];
+$quantity = $_SESSION['quantity'];
+$title = $_SESSION['title'];
+$description = $_SESSION['description'];
+$brandID = $_SESSION['brandID'];
+$color = $_SESSION['color'];
+$size = $_SESSION['size'];
+$shipFrom = $_SESSION['shipFrom'];
+$shipTo = $_SESSION['shipTo'];
+$return = $_SESSION['return'];
+$price = $_SESSION['price'];
+$iID = $_SESSION['iID'];
+$image=$_SESSION['image'];
+$paypal=$_SESSION['paypal'];
+
+if(isset($_POST['no']))
+    $premium=0;
+else
+    $premium=$_SESSION['premium'];
+
+    
+
+ $type = substr($iID, 0, 1);
+$categories="";
+$query="";
+switch ($type) {
+            case 't': {$categories = 'tugs';break;}
+            case 's': {$categories = 'suits_sleeves';break;}
+            case 'c': {$categories = 'collars';break;}
+            case 'e': {$categories = 'ecollars';break;}
+            case 'm': {$categories = 'muzzles';break;}
+            case 'l': {$categories = 'leashes';break;}
+            case 'o': {$categories = 'other';break;}
+            case 'h': {$categories = 'harnesses';break;}
+        }
+        
+        
+$username = "jordon";
+$password = "Aryahij11!";
+$database = "db_1";
+                    $mysqli = new mysqli('127.0.0.1',$username,$password,$database,'3306');
+//                    
+//                    //Output any connection error
+                    if ($mysqli->connect_error) {
+                        die('Error : ('. $mysqli->connect_errno .') '. $mysqli->connect_error);
+                    }
+$result=$mysqli->query("INSERT INTO $categories (itemID,name,brandID,price,description,sellerID,premium,image,color,size,created,sale_fee,paypal,quantity,sold) VALUES ('$iID', '$title', '$brandID', '$price','$description' , '$sellerID', '$premium', '$image', '$color', '$size', CURDATE() ,'".floatval($_SESSION['sale_fee'])."','$paypal','".floatval($quantity)."',0)");
+if($result){
+                        print 'Success! ID of last inserted record is : ' .$mysqli->insert_id .'<br />'; 
+                    }else{
+                        die('Error : ('. $mysqli->errno .') '. $mysqli->error);
+                    }
+
+$result2=$mysqli->query("INSERT INTO shipping VALUES ('$sellerID','$iID','$shipFrom','$shipTo','$return','1');");
+if($result2){
+                      
+                    }else{
+                        die('Error : ('. $mysqli->errno .') '. $mysqli->error);
+                    }
+                    
+                    $vNum=$_SESSION['verification'];
+$result3=$mysqli->query("INSERT INTO verification VALUES ('$iID','$vNum');");
+if($result3){
+                      
+                    }else{
+                        die('Error : ('. $mysqli->errno .') '. $mysqli->error);
+                    }
+                    
+                    
+                    
+                    header("Location: /buy/$iID");
+
+
+?>
