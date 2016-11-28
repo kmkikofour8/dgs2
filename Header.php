@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 
+
 <?php
 #echo $_SERVER['DOCUMENT_ROOT'].'db.php';
 include $_SERVER['DOCUMENT_ROOT'] . 'db.php';

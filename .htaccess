@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+   #RewriteRule ^.*$ htaccess_tester.php
+#RewriteRule ^buy\/item\.php(.*)$ htaccess_tester.php
+RewriteRule ^buy\/([a-z]+[0-9]+)$ buy/item.php?i=$1 
+RewriteRule ^user\/profile$ user/profile.php
+RewriteRule ^user\/editProfile$ user/editProfile.php
+RewriteRule ^login\/index$ login/index.php
+RewriteRule ^user\/editPaypal$ user/editPaypal.php
+RewriteRule ^update\/([a-z]+[0-9]+)$ update?itemID=$1
+#RewriteRule ^Buy\/([A-Z]+)$ Buy.php?page=$1 [NC]
+
+
+  #RewriteRule ^.*/buy/item.php?i=([a-z]+[0-9]+)$ htaccess_test.php
+</IfModule>
